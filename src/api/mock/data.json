@@ -1,0 +1,822 @@
+{
+ "library": {
+  "hasPhotos": true,
+  "photoCount": 50,
+  "videoCount": 7,
+  "tripCount": 6
+ },
+ "upload": {
+  "id": "up_7f3a",
+  "status": "processing",
+  "processed": 248,
+  "total": 612,
+  "stage": "finding_dates_places",
+  "stages": [
+   {
+    "key": "reading",
+    "label": "Reading photos"
+   },
+   {
+    "key": "finding_dates_places",
+    "label": "Finding dates and places"
+   },
+   {
+    "key": "grouping",
+    "label": "Grouping into trips"
+   }
+  ],
+  "tripsFound": [
+   {
+    "id": "amalfi-coast-2026",
+    "title": "Amalfi Coast",
+    "photoCount": 118
+   },
+   {
+    "id": "norway-fjords-2026",
+    "title": "Norway Fjords",
+    "photoCount": 74
+   },
+   {
+    "id": "goa-2025",
+    "title": "Goa",
+    "photoCount": 41
+   }
+  ],
+  "recentThumbs": [
+   "img/thumbs/p323.jpg",
+   "img/thumbs/p397.jpg",
+   "img/thumbs/p1050.jpg",
+   "img/thumbs/p702.jpg",
+   "img/thumbs/p485.jpg",
+   "img/thumbs/p603.jpg",
+   "img/thumbs/p374.jpg",
+   "img/thumbs/p483.jpg",
+   "img/thumbs/p610.jpg",
+   "img/thumbs/p606.jpg",
+   "img/thumbs/p586.jpg",
+   "img/thumbs/p218.jpg"
+  ]
+ },
+ "trips": [
+  {
+   "id": "amalfi-coast-2026",
+   "title": "Amalfi Coast",
+   "place": "Amalfi Coast",
+   "country": "Italy",
+   "startDate": "2026-09-12",
+   "endDate": "2026-09-18",
+   "coverUrl": "img/full/p323.jpg",
+   "photoCount": 20,
+   "videoCount": 3,
+   "days": [
+    {
+     "day": 1,
+     "date": "2026-09-12",
+     "place": "Naples",
+     "media": [
+      {
+       "id": "amalfi-coast-2026-d1-01",
+       "type": "photo",
+       "url": "img/full/p164.jpg",
+       "thumbUrl": "img/thumbs/p164.jpg",
+       "takenAt": "2026-09-12T09:00:00+02:00",
+       "lat": 40.852,
+       "lon": 14.268,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d1-02",
+       "type": "photo",
+       "url": "img/full/p1047.jpg",
+       "thumbUrl": "img/thumbs/p1047.jpg",
+       "takenAt": "2026-09-12T11:17:00+02:00",
+       "lat": 40.855,
+       "lon": 14.271,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d1-03",
+       "type": "video",
+       "url": "img/full/p288.jpg",
+       "thumbUrl": "img/thumbs/p288.jpg",
+       "takenAt": "2026-09-12T13:34:00+02:00",
+       "lat": 40.858,
+       "lon": 14.274,
+       "durationSec": 18
+      },
+      {
+       "id": "amalfi-coast-2026-d1-04",
+       "type": "photo",
+       "url": "img/full/p402.jpg",
+       "thumbUrl": "img/thumbs/p402.jpg",
+       "takenAt": "2026-09-12T15:51:00+02:00",
+       "lat": 40.861,
+       "lon": 14.277,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d1-05",
+       "type": "photo",
+       "url": "img/full/p397.jpg",
+       "thumbUrl": "img/thumbs/p397.jpg",
+       "takenAt": "2026-09-12T17:08:00+02:00",
+       "lat": 40.864,
+       "lon": 14.28,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d1-06",
+       "type": "photo",
+       "url": "img/full/p419.jpg",
+       "thumbUrl": "img/thumbs/p419.jpg",
+       "takenAt": "2026-09-12T19:25:00+02:00",
+       "lat": 40.867,
+       "lon": 14.283,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 2,
+     "date": "2026-09-14",
+     "place": "Sorrento",
+     "media": [
+      {
+       "id": "amalfi-coast-2026-d2-01",
+       "type": "photo",
+       "url": "img/full/p374.jpg",
+       "thumbUrl": "img/thumbs/p374.jpg",
+       "takenAt": "2026-09-14T09:00:00+02:00",
+       "lat": 40.626,
+       "lon": 14.375,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d2-02",
+       "type": "photo",
+       "url": "img/full/p218.jpg",
+       "thumbUrl": "img/thumbs/p218.jpg",
+       "takenAt": "2026-09-14T11:17:00+02:00",
+       "lat": 40.629,
+       "lon": 14.378,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d2-03",
+       "type": "photo",
+       "url": "img/full/p483.jpg",
+       "thumbUrl": "img/thumbs/p483.jpg",
+       "takenAt": "2026-09-14T13:34:00+02:00",
+       "lat": 40.632,
+       "lon": 14.381,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d2-04",
+       "type": "video",
+       "url": "img/full/p606.jpg",
+       "thumbUrl": "img/thumbs/p606.jpg",
+       "takenAt": "2026-09-14T15:51:00+02:00",
+       "lat": 40.635,
+       "lon": 14.384,
+       "durationSec": 24
+      },
+      {
+       "id": "amalfi-coast-2026-d2-05",
+       "type": "photo",
+       "url": "img/full/p586.jpg",
+       "thumbUrl": "img/thumbs/p586.jpg",
+       "takenAt": "2026-09-14T17:08:00+02:00",
+       "lat": 40.638,
+       "lon": 14.387,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d2-06",
+       "type": "photo",
+       "url": "img/full/p610.jpg",
+       "thumbUrl": "img/thumbs/p610.jpg",
+       "takenAt": "2026-09-14T19:25:00+02:00",
+       "lat": 40.641,
+       "lon": 14.39,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 3,
+     "date": "2026-09-16",
+     "place": "Capri",
+     "media": [
+      {
+       "id": "amalfi-coast-2026-d3-01",
+       "type": "photo",
+       "url": "img/full/p1050.jpg",
+       "thumbUrl": "img/thumbs/p1050.jpg",
+       "takenAt": "2026-09-16T09:00:00+02:00",
+       "lat": 40.551,
+       "lon": 14.243,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d3-02",
+       "type": "photo",
+       "url": "img/full/p485.jpg",
+       "thumbUrl": "img/thumbs/p485.jpg",
+       "takenAt": "2026-09-16T11:17:00+02:00",
+       "lat": 40.554,
+       "lon": 14.246,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d3-03",
+       "type": "photo",
+       "url": "img/full/p603.jpg",
+       "thumbUrl": "img/thumbs/p603.jpg",
+       "takenAt": "2026-09-16T13:34:00+02:00",
+       "lat": 40.557,
+       "lon": 14.249,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d3-04",
+       "type": "photo",
+       "url": "img/full/p717.jpg",
+       "thumbUrl": "img/thumbs/p717.jpg",
+       "takenAt": "2026-09-16T15:51:00+02:00",
+       "lat": 40.56,
+       "lon": 14.252,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d3-05",
+       "type": "video",
+       "url": "img/full/p482.jpg",
+       "thumbUrl": "img/thumbs/p482.jpg",
+       "takenAt": "2026-09-16T17:08:00+02:00",
+       "lat": 40.563,
+       "lon": 14.255,
+       "durationSec": 12
+      },
+      {
+       "id": "amalfi-coast-2026-d3-06",
+       "type": "photo",
+       "url": "img/full/p499.jpg",
+       "thumbUrl": "img/thumbs/p499.jpg",
+       "takenAt": "2026-09-16T19:25:00+02:00",
+       "lat": 40.566,
+       "lon": 14.258,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 4,
+     "date": "2026-09-18",
+     "place": "Positano",
+     "media": [
+      {
+       "id": "amalfi-coast-2026-d4-01",
+       "type": "photo",
+       "url": "img/full/p323.jpg",
+       "thumbUrl": "img/thumbs/p323.jpg",
+       "takenAt": "2026-09-18T09:00:00+02:00",
+       "lat": 40.628,
+       "lon": 14.485,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d4-02",
+       "type": "photo",
+       "url": "img/full/p702.jpg",
+       "thumbUrl": "img/thumbs/p702.jpg",
+       "takenAt": "2026-09-18T11:17:00+02:00",
+       "lat": 40.631,
+       "lon": 14.488,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d4-03",
+       "type": "photo",
+       "url": "img/full/p397.jpg",
+       "thumbUrl": "img/thumbs/p397.jpg",
+       "takenAt": "2026-09-18T13:34:00+02:00",
+       "lat": 40.634,
+       "lon": 14.491,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d4-04",
+       "type": "photo",
+       "url": "img/full/p715.jpg",
+       "thumbUrl": "img/thumbs/p715.jpg",
+       "takenAt": "2026-09-18T15:51:00+02:00",
+       "lat": 40.637,
+       "lon": 14.494,
+       "durationSec": null
+      },
+      {
+       "id": "amalfi-coast-2026-d4-05",
+       "type": "photo",
+       "url": "img/full/p547.jpg",
+       "thumbUrl": "img/thumbs/p547.jpg",
+       "takenAt": "2026-09-18T17:08:00+02:00",
+       "lat": 40.64,
+       "lon": 14.497,
+       "durationSec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "norway-fjords-2026",
+   "title": "Norway Fjords",
+   "place": "Geiranger",
+   "country": "Norway",
+   "startDate": "2026-06-03",
+   "endDate": "2026-06-07",
+   "coverUrl": "img/thumbs/p1015.jpg",
+   "photoCount": 9,
+   "videoCount": 1,
+   "days": [
+    {
+     "day": 1,
+     "date": "2026-06-03",
+     "place": "Bergen",
+     "media": [
+      {
+       "id": "norway-fjords-2026-d1-01",
+       "type": "photo",
+       "url": "img/full/p1015.jpg",
+       "thumbUrl": "img/thumbs/p1015.jpg",
+       "takenAt": "2026-06-03T09:00:00+02:00",
+       "lat": 60.39,
+       "lon": 5.32,
+       "durationSec": null
+      },
+      {
+       "id": "norway-fjords-2026-d1-02",
+       "type": "photo",
+       "url": "img/full/p507.jpg",
+       "thumbUrl": "img/thumbs/p507.jpg",
+       "takenAt": "2026-06-03T11:17:00+02:00",
+       "lat": 60.393,
+       "lon": 5.323,
+       "durationSec": null
+      },
+      {
+       "id": "norway-fjords-2026-d1-03",
+       "type": "photo",
+       "url": "img/full/p1043.jpg",
+       "thumbUrl": "img/thumbs/p1043.jpg",
+       "takenAt": "2026-06-03T13:34:00+02:00",
+       "lat": 60.396,
+       "lon": 5.326,
+       "durationSec": null
+      },
+      {
+       "id": "norway-fjords-2026-d1-04",
+       "type": "video",
+       "url": "img/full/p1044.jpg",
+       "thumbUrl": "img/thumbs/p1044.jpg",
+       "takenAt": "2026-06-03T15:51:00+02:00",
+       "lat": 60.399,
+       "lon": 5.329,
+       "durationSec": 31
+      }
+     ]
+    },
+    {
+     "day": 2,
+     "date": "2026-06-05",
+     "place": "Geiranger",
+     "media": [
+      {
+       "id": "norway-fjords-2026-d2-01",
+       "type": "photo",
+       "url": "img/full/p575.jpg",
+       "thumbUrl": "img/thumbs/p575.jpg",
+       "takenAt": "2026-06-05T09:00:00+02:00",
+       "lat": 62.1,
+       "lon": 7.21,
+       "durationSec": null
+      },
+      {
+       "id": "norway-fjords-2026-d2-02",
+       "type": "photo",
+       "url": "img/full/p1039.jpg",
+       "thumbUrl": "img/thumbs/p1039.jpg",
+       "takenAt": "2026-06-05T11:17:00+02:00",
+       "lat": 62.103,
+       "lon": 7.213,
+       "durationSec": null
+      },
+      {
+       "id": "norway-fjords-2026-d2-03",
+       "type": "photo",
+       "url": "img/full/p509.jpg",
+       "thumbUrl": "img/thumbs/p509.jpg",
+       "takenAt": "2026-06-05T13:34:00+02:00",
+       "lat": 62.106,
+       "lon": 7.216,
+       "durationSec": null
+      },
+      {
+       "id": "norway-fjords-2026-d2-04",
+       "type": "photo",
+       "url": "img/full/p773.jpg",
+       "thumbUrl": "img/thumbs/p773.jpg",
+       "takenAt": "2026-06-05T15:51:00+02:00",
+       "lat": 62.109,
+       "lon": 7.219,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 3,
+     "date": "2026-06-07",
+     "place": "Ålesund",
+     "media": [
+      {
+       "id": "norway-fjords-2026-d3-01",
+       "type": "photo",
+       "url": "img/full/p599.jpg",
+       "thumbUrl": "img/thumbs/p599.jpg",
+       "takenAt": "2026-06-07T09:00:00+02:00",
+       "lat": 62.47,
+       "lon": 6.15,
+       "durationSec": null
+      },
+      {
+       "id": "norway-fjords-2026-d3-02",
+       "type": "photo",
+       "url": "img/full/p779.jpg",
+       "thumbUrl": "img/thumbs/p779.jpg",
+       "takenAt": "2026-06-07T11:17:00+02:00",
+       "lat": 62.473,
+       "lon": 6.153,
+       "durationSec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "goa-2025",
+   "title": "Goa",
+   "place": "Goa",
+   "country": "India",
+   "startDate": "2025-12-22",
+   "endDate": "2025-12-24",
+   "coverUrl": "img/thumbs/p643.jpg",
+   "photoCount": 6,
+   "videoCount": 1,
+   "days": [
+    {
+     "day": 1,
+     "date": "2025-12-22",
+     "place": "Anjuna",
+     "media": [
+      {
+       "id": "goa-2025-d1-01",
+       "type": "photo",
+       "url": "img/full/p643.jpg",
+       "thumbUrl": "img/thumbs/p643.jpg",
+       "takenAt": "2025-12-22T09:00:00+02:00",
+       "lat": 15.58,
+       "lon": 73.74,
+       "durationSec": null
+      },
+      {
+       "id": "goa-2025-d1-02",
+       "type": "photo",
+       "url": "img/full/p645.jpg",
+       "thumbUrl": "img/thumbs/p645.jpg",
+       "takenAt": "2025-12-22T11:17:00+02:00",
+       "lat": 15.583,
+       "lon": 73.743,
+       "durationSec": null
+      },
+      {
+       "id": "goa-2025-d1-03",
+       "type": "video",
+       "url": "img/full/p641.jpg",
+       "thumbUrl": "img/thumbs/p641.jpg",
+       "takenAt": "2025-12-22T13:34:00+02:00",
+       "lat": 15.586,
+       "lon": 73.746,
+       "durationSec": 15
+      },
+      {
+       "id": "goa-2025-d1-04",
+       "type": "photo",
+       "url": "img/full/p653.jpg",
+       "thumbUrl": "img/thumbs/p653.jpg",
+       "takenAt": "2025-12-22T15:51:00+02:00",
+       "lat": 15.589,
+       "lon": 73.749,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 2,
+     "date": "2025-12-24",
+     "place": "Palolem",
+     "media": [
+      {
+       "id": "goa-2025-d2-01",
+       "type": "photo",
+       "url": "img/full/p715.jpg",
+       "thumbUrl": "img/thumbs/p715.jpg",
+       "takenAt": "2025-12-24T09:00:00+02:00",
+       "lat": 15.01,
+       "lon": 74.02,
+       "durationSec": null
+      },
+      {
+       "id": "goa-2025-d2-02",
+       "type": "photo",
+       "url": "img/full/p547.jpg",
+       "thumbUrl": "img/thumbs/p547.jpg",
+       "takenAt": "2025-12-24T11:17:00+02:00",
+       "lat": 15.013,
+       "lon": 74.023,
+       "durationSec": null
+      },
+      {
+       "id": "goa-2025-d2-03",
+       "type": "photo",
+       "url": "img/full/p655.jpg",
+       "thumbUrl": "img/thumbs/p655.jpg",
+       "takenAt": "2025-12-24T13:34:00+02:00",
+       "lat": 15.016,
+       "lon": 74.026,
+       "durationSec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ladakh-2025",
+   "title": "Ladakh",
+   "place": "Leh",
+   "country": "India",
+   "startDate": "2025-08-09",
+   "endDate": "2025-08-13",
+   "coverUrl": "img/thumbs/p235.jpg",
+   "photoCount": 6,
+   "videoCount": 1,
+   "days": [
+    {
+     "day": 1,
+     "date": "2025-08-09",
+     "place": "Leh",
+     "media": [
+      {
+       "id": "ladakh-2025-d1-01",
+       "type": "photo",
+       "url": "img/full/p235.jpg",
+       "thumbUrl": "img/thumbs/p235.jpg",
+       "takenAt": "2025-08-09T09:00:00+02:00",
+       "lat": 34.15,
+       "lon": 77.58,
+       "durationSec": null
+      },
+      {
+       "id": "ladakh-2025-d1-02",
+       "type": "photo",
+       "url": "img/full/p806.jpg",
+       "thumbUrl": "img/thumbs/p806.jpg",
+       "takenAt": "2025-08-09T11:17:00+02:00",
+       "lat": 34.153,
+       "lon": 77.583,
+       "durationSec": null
+      },
+      {
+       "id": "ladakh-2025-d1-03",
+       "type": "photo",
+       "url": "img/full/p676.jpg",
+       "thumbUrl": "img/thumbs/p676.jpg",
+       "takenAt": "2025-08-09T13:34:00+02:00",
+       "lat": 34.156,
+       "lon": 77.586,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 2,
+     "date": "2025-08-11",
+     "place": "Nubra",
+     "media": [
+      {
+       "id": "ladakh-2025-d2-01",
+       "type": "photo",
+       "url": "img/full/p678.jpg",
+       "thumbUrl": "img/thumbs/p678.jpg",
+       "takenAt": "2025-08-11T09:00:00+02:00",
+       "lat": 34.6,
+       "lon": 77.55,
+       "durationSec": null
+      },
+      {
+       "id": "ladakh-2025-d2-02",
+       "type": "video",
+       "url": "img/full/p684.jpg",
+       "thumbUrl": "img/thumbs/p684.jpg",
+       "takenAt": "2025-08-11T11:17:00+02:00",
+       "lat": 34.603,
+       "lon": 77.553,
+       "durationSec": 22
+      },
+      {
+       "id": "ladakh-2025-d2-03",
+       "type": "photo",
+       "url": "img/full/p558.jpg",
+       "thumbUrl": "img/thumbs/p558.jpg",
+       "takenAt": "2025-08-11T13:34:00+02:00",
+       "lat": 34.606,
+       "lon": 77.556,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 3,
+     "date": "2025-08-13",
+     "place": "Pangong",
+     "media": [
+      {
+       "id": "ladakh-2025-d3-01",
+       "type": "photo",
+       "url": "img/full/p484.jpg",
+       "thumbUrl": "img/thumbs/p484.jpg",
+       "takenAt": "2025-08-13T09:00:00+02:00",
+       "lat": 33.75,
+       "lon": 78.67,
+       "durationSec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "coorg-2025",
+   "title": "Coorg",
+   "place": "Madikeri",
+   "country": "India",
+   "startDate": "2025-01-24",
+   "endDate": "2025-01-26",
+   "coverUrl": "img/thumbs/p688.jpg",
+   "photoCount": 5,
+   "videoCount": 0,
+   "days": [
+    {
+     "day": 1,
+     "date": "2025-01-24",
+     "place": "Madikeri",
+     "media": [
+      {
+       "id": "coorg-2025-d1-01",
+       "type": "photo",
+       "url": "img/full/p688.jpg",
+       "thumbUrl": "img/thumbs/p688.jpg",
+       "takenAt": "2025-01-24T09:00:00+02:00",
+       "lat": 12.42,
+       "lon": 75.74,
+       "durationSec": null
+      },
+      {
+       "id": "coorg-2025-d1-02",
+       "type": "photo",
+       "url": "img/full/p287.jpg",
+       "thumbUrl": "img/thumbs/p287.jpg",
+       "takenAt": "2025-01-24T11:17:00+02:00",
+       "lat": 12.423,
+       "lon": 75.743,
+       "durationSec": null
+      },
+      {
+       "id": "coorg-2025-d1-03",
+       "type": "photo",
+       "url": "img/full/p772.jpg",
+       "thumbUrl": "img/thumbs/p772.jpg",
+       "takenAt": "2025-01-24T13:34:00+02:00",
+       "lat": 12.426,
+       "lon": 75.746,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 2,
+     "date": "2025-01-26",
+     "place": "Abbey Falls",
+     "media": [
+      {
+       "id": "coorg-2025-d2-01",
+       "type": "photo",
+       "url": "img/full/p1018.jpg",
+       "thumbUrl": "img/thumbs/p1018.jpg",
+       "takenAt": "2025-01-26T09:00:00+02:00",
+       "lat": 12.45,
+       "lon": 75.72,
+       "durationSec": null
+      },
+      {
+       "id": "coorg-2025-d2-02",
+       "type": "photo",
+       "url": "img/full/p695.jpg",
+       "thumbUrl": "img/thumbs/p695.jpg",
+       "takenAt": "2025-01-26T11:17:00+02:00",
+       "lat": 12.453,
+       "lon": 75.723,
+       "durationSec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lisbon-2024",
+   "title": "Lisbon",
+   "place": "Lisbon",
+   "country": "Portugal",
+   "startDate": "2024-10-04",
+   "endDate": "2024-10-06",
+   "coverUrl": "img/thumbs/p419.jpg",
+   "photoCount": 4,
+   "videoCount": 1,
+   "days": [
+    {
+     "day": 1,
+     "date": "2024-10-04",
+     "place": "Alfama",
+     "media": [
+      {
+       "id": "lisbon-2024-d1-01",
+       "type": "photo",
+       "url": "img/full/p419.jpg",
+       "thumbUrl": "img/thumbs/p419.jpg",
+       "takenAt": "2024-10-04T09:00:00+02:00",
+       "lat": 38.71,
+       "lon": -9.13,
+       "durationSec": null
+      },
+      {
+       "id": "lisbon-2024-d1-02",
+       "type": "photo",
+       "url": "img/full/p670.jpg",
+       "thumbUrl": "img/thumbs/p670.jpg",
+       "takenAt": "2024-10-04T11:17:00+02:00",
+       "lat": 38.713,
+       "lon": -9.127,
+       "durationSec": null
+      },
+      {
+       "id": "lisbon-2024-d1-03",
+       "type": "photo",
+       "url": "img/full/p288.jpg",
+       "thumbUrl": "img/thumbs/p288.jpg",
+       "takenAt": "2024-10-04T13:34:00+02:00",
+       "lat": 38.716,
+       "lon": -9.124,
+       "durationSec": null
+      }
+     ]
+    },
+    {
+     "day": 2,
+     "date": "2024-10-06",
+     "place": "Belém",
+     "media": [
+      {
+       "id": "lisbon-2024-d2-01",
+       "type": "photo",
+       "url": "img/full/p1047.jpg",
+       "thumbUrl": "img/thumbs/p1047.jpg",
+       "takenAt": "2024-10-06T09:00:00+02:00",
+       "lat": 38.7,
+       "lon": -9.21,
+       "durationSec": null
+      },
+      {
+       "id": "lisbon-2024-d2-02",
+       "type": "video",
+       "url": "img/full/p402.jpg",
+       "thumbUrl": "img/thumbs/p402.jpg",
+       "takenAt": "2024-10-06T11:17:00+02:00",
+       "lat": 38.703,
+       "lon": -9.207,
+       "durationSec": 20
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

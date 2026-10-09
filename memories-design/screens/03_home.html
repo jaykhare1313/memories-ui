@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Memories — Home</title>
+<link rel="stylesheet" href="../ds.css"><link rel="stylesheet" href="../app.css"><style>
+.feat{display:block;position:relative;height:340px;border-radius:28px;overflow:hidden;box-shadow:0 1px 2px rgba(60,40,20,.08),0 30px 60px -30px rgba(60,40,20,.4)}
+.feat img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.feat .s{position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,12,16,.78) 0%,rgba(12,12,16,.42) 42%,rgba(12,12,16,0) 70%)}
+.feat .c{position:absolute;left:48px;bottom:44px}
+.pill{display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:var(--blur);border:1px solid rgba(255,255,255,.22)}
+.sec{display:flex;align-items:baseline;gap:16px;margin:40px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+</style></head><body class="theme-light grain">
+<header class="top"><div class="brand"><div class="logo-mark"></div><b>Memories</b></div>
+  <a class="btn btn-primary btn-sm" style="height:42px" href="02_uploading.html"><svg class="i"><use href="#upload"/></svg>Upload more</a></header>
+<main class="page" id="app"></main>
+<div class="mock">Mockup · Step 1 · Home</div>
+<script type="module">
+import { getLibraryStatus, listTrips, assetSrc } from '../js/data.js';
+import { mountIcons, icon, esc, dateRange, nDays, plural, ready } from '../js/ui.js';
+await mountIcons();
+const status = await getLibraryStatus();
+if (!status.hasPhotos) location.replace('01_empty.html');
+const [latest, ...rest] = await listTrips();                    // newest first
+const counts = t => [plural(t.photoCount, 'photo'), t.videoCount ? plural(t.videoCount, 'video') : ''].filter(Boolean);
+document.getElementById('app').innerHTML = `
+<a class="feat on-dark" href="04_trip.html?id=${encodeURIComponent(latest.id)}">
+  <img src="${assetSrc(latest.coverUrl)}"><div class="s"></div>
+  <div class="c">
+    <span class="pill t-micro"><span class="dot" style="background:var(--ember-hi)"></span>Latest trip</span>
+    <div class="d-xl" style="font-size:96px;margin-top:16px">${esc(latest.title)}</div>
+    <div style="margin-top:12px;font-size:15px;color:rgba(247,244,238,.9)">${dateRange(latest.startDate, latest.endDate)} · ${nDays(latest.startDate, latest.endDate)} days · ${counts(latest).join(' · ')}</div>
+    <div style="display:flex;gap:10px;margin-top:22px">
+      <span class="btn btn-primary">${icon('play', 'i f')}Play film</span>
+      <span class="btn btn-glass">Open trip${icon('arrow-r')}</span>
+    </div>
+  </div>
+</a>
+<div class="sec"><span class="d-m">Your trips</span><span class="t-label mute">${plural(status.tripCount, 'trip')} · ${plural(status.photoCount, 'photo')}</span></div>
+<div class="grid">${rest.map(t => `
+  <a class="tcard" href="04_trip.html?id=${encodeURIComponent(t.id)}">
+    <div class="ph"><img src="${assetSrc(t.coverUrl)}"></div>
+    <div class="n">${esc(t.title)}</div>
+    <div class="m"><span>${dateRange(t.startDate, t.endDate)}</span><span class="sep">•</span><span>${plural(t.photoCount, 'photo')}</span></div>
+  </a>`).join('')}
+</div>`;
+ready();
+</script></body></html>

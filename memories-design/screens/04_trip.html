@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Memories — Trip</title>
+<link rel="stylesheet" href="../ds.css"><link rel="stylesheet" href="../app.css"><style>
+.hd{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:26px;border-bottom:1px solid var(--line)}
+.back{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 10px;border-radius:999px;font-size:13.5px;font-weight:500;color:var(--mute);background:var(--fill-2);border:1px solid var(--line);margin-bottom:18px}
+.back svg{width:16px;height:16px}
+.days{position:relative;height:640px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent)}
+.day{margin-top:26px}
+.dh{display:flex;align-items:baseline;gap:14px;margin-bottom:14px}
+.dh .d{font-family:var(--serif);font-size:32px;line-height:1}
+.dh .w{font-size:14px;color:var(--mute)}
+.dh .c{margin-left:auto;font:500 11.5px var(--mono);color:var(--faint);letter-spacing:.04em}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.it{position:relative;height:156px;border-radius:16px;overflow:hidden;background:var(--ink-3);box-shadow:var(--sh-1)}
+.it img{width:100%;height:100%;object-fit:cover}
+.it .badge{right:10px;bottom:10px}
+</style></head><body class="theme-light grain">
+<header class="top"><div class="brand"><div class="logo-mark"></div><b>Memories</b></div>
+  <a class="btn btn-glass btn-sm" style="height:42px;background:#fff" href="02_uploading.html"><svg class="i"><use href="#upload"/></svg>Upload more</a></header>
+<main class="page" id="app"></main>
+<div class="mock">Mockup · Step 1 · Trip</div>
+<script type="module">
+import { getTrip, thumbSrc } from '../js/data.js';
+import { mountIcons, icon, esc, dateRange, dayLabel, nDays, plural, duration, ready } from '../js/ui.js';
+await mountIcons();
+const t = await getTrip(new URLSearchParams(location.search).get('id'));
+document.title = `Memories — ${t.title}`;
+document.getElementById('app').innerHTML = `
+<div class="hd">
+  <div>
+    <a class="back" href="03_home.html">${icon('arrow-l')}All trips</a>
+    <div class="d-l" style="font-size:80px">${esc(t.title)}</div>
+    <div style="margin-top:12px;font-size:15px;color:var(--mute)">${dateRange(t.startDate, t.endDate)} · ${t.country} · ${nDays(t.startDate, t.endDate)} days · ${plural(t.photoCount, 'photo')} · ${plural(t.videoCount, 'video')}</div>
+  </div>
+  <button class="btn btn-accent btn-lg">${icon('play', 'i f')}Play film</button>
+</div>
+<div class="days">${t.days.map(d => `
+  <section class="day">
+    <div class="dh"><span class="d">Day ${d.day}</span><span class="w">${dayLabel(d.date)} · ${esc(d.place)}</span><span class="c">${d.media.length} ITEMS</span></div>
+    <div class="grid">${d.media.map(m => `<div class="it"><img src="${thumbSrc(m)}" alt="">${m.type === 'video' ? `<span class="badge">${icon('play', 'i f')}${duration(m.durationSec)}</span>` : ''}</div>`).join('')}</div>
+  </section>`).join('')}
+</div>`;
+ready();
+</script></body></html>

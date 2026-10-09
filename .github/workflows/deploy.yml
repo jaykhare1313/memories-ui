@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    branches: [develop, main]
+  workflow_dispatch:
+
+jobs:
+  deploy-dev:
+    if: github.ref == 'refs/heads/develop'
+    uses: ./.github/workflows/deploy-netlify.yml
+    with:
+      github_environment: dev
+      vite_app_env: dev
+      site_label: memories-ui-dev
+    secrets:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DEV }}
+
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy-netlify.yml
+    with:
+      github_environment: production
+      vite_app_env: prod
+      site_label: memories-ui
+    secrets:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_PROD }}

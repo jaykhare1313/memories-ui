@@ -1,0 +1,84 @@
+name: Deploy to Netlify
+
+on:
+  workflow_call:
+    inputs:
+      github_environment:
+        description: GitHub Environment name (dev or production)
+        required: true
+        type: string
+      vite_app_env:
+        description: VITE_APP_ENV value (dev or prod)
+        required: true
+        type: string
+      site_label:
+        description: Human-readable site name for the job summary
+        required: true
+        type: string
+    secrets:
+      NETLIFY_AUTH_TOKEN:
+        required: true
+      NETLIFY_SITE_ID:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.github_environment }}
+    concurrency:
+      group: netlify-${{ inputs.github_environment }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_DATA_SOURCE: mock
+          VITE_APP_ENV: ${{ inputs.vite_app_env }}
+
+      - name: Deploy to Netlify
+        id: netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          set -euo pipefail
+          JSON=$(npx --yes netlify-cli@23.9.1 deploy \
+            --dir=dist \
+            --prod \
+            --site="$NETLIFY_SITE_ID" \
+            --message "GitHub Actions ${GITHUB_SHA}" \
+            --json)
+          echo "$JSON" > netlify-deploy.json
+          URL=$(jq -r '.url // .deploy_ssl_url // empty' netlify-deploy.json)
+          if [ -z "$URL" ] || [ "$URL" = "null" ]; then
+            URL=$(npx --yes netlify-cli@23.9.1 api getSite \
+              --data "{\"site_id\":\"$NETLIFY_SITE_ID\"}" | jq -r '.ssl_url // .url')
+          fi
+          echo "deploy_url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Job summary
+        env:
+          DEPLOY_URL: ${{ steps.netlify.outputs.deploy_url }}
+        run: |
+          {
+            echo "## Deployed (${{ inputs.github_environment }})"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| **Environment** | \`${{ inputs.github_environment }}\` |"
+            echo "| **Netlify site** | \`${{ inputs.site_label }}\` |"
+            echo "| **URL** | ${DEPLOY_URL} |"
+            echo "| **Commit** | \`${{ github.sha }}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
