@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Memories — Empty</title>
+<link rel="stylesheet" href="../ds.css"><link rel="stylesheet" href="../app.css"><style>
+.wrap{position:absolute;left:0;right:0;top:148px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.art{position:relative;width:220px;height:120px;margin-bottom:26px}
+.art div{position:absolute;top:10px;width:110px;height:84px;border-radius:14px;border:4px solid #fff;overflow:hidden;box-shadow:0 14px 30px -12px rgba(60,40,20,.35);background:var(--ink-3)}
+.art img{width:100%;height:100%;object-fit:cover;filter:saturate(.25) brightness(1.08);opacity:.6}
+.drop{margin-top:36px;width:760px;height:300px;border-radius:30px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.drop::before{content:"";position:absolute;inset:12px;border-radius:22px;border:2px dashed rgba(185,70,26,.28)}
+.up{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:#FFF1E6;color:var(--ember);margin-bottom:18px}
+.art .big{width:30px;height:30px;stroke-width:1.5}
+.up svg{width:28px;height:28px;stroke-width:1.8}
+</style></head><body class="theme-light grain">
+<header class="top"><div class="brand"><div class="logo-mark"></div><b>Memories</b></div></header>
+<main id="app"></main>
+<div class="mock">Mockup · Step 1 · Empty</div>
+<script type="module">
+import { getLibraryStatus } from '../js/data.js';
+import { mountIcons, icon, ready } from '../js/ui.js';
+await mountIcons();
+const status = await getLibraryStatus();
+if (status.hasPhotos) location.replace('03_home.html');      // guard: empty state only when library is empty
+document.getElementById('app').innerHTML = `
+<div class="wrap">
+  <div class="art">
+    <div style="left:6px;transform:rotate(-9deg)"><img src="../img/thumbs/p323.jpg"></div>
+    <div style="left:104px;transform:rotate(8deg)"><img src="../img/thumbs/p1015.jpg"></div>
+    <div style="left:55px;top:0;transform:rotate(-1deg);z-index:2;background:#fff;display:grid;place-items:center;color:var(--faint)">${icon("image","i big")}</div>
+  </div>
+  <div class="d-l" style="font-size:72px">No memories <i>yet</i></div>
+  <p class="t-body mute" style="margin-top:14px;font-size:17px;line-height:26px">Add your trip photos and videos. Memories sorts them into trips by date and place.</p>
+  <section class="drop glass" style="background:rgba(255,255,255,.72)" aria-label="Upload zone">
+    <div class="up">${icon('upload')}</div>
+    <div class="t-title" style="font-size:22px">Drag a folder or photos here</div>
+    <div class="t-label mute" style="margin-top:8px">JPG, HEIC, PNG, MP4 and MOV</div>
+    <div style="display:flex;gap:12px;margin-top:26px">
+      <button class="btn btn-primary" style="border:0">${icon('folder')}Choose folder</button>
+      <button class="btn btn-glass" style="background:#fff">${icon('image')}Choose photos</button>
+    </div>
+  </section>
+  <div class="note" style="margin-top:28px">${icon('lock')}Everything stays on this computer. Nothing is sent online.</div>
+</div>`;
+ready();
+</script></body></html>

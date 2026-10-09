@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Memories — Adding photos</title>
+<link rel="stylesheet" href="../ds.css"><link rel="stylesheet" href="../app.css"><style>
+.wrap{position:absolute;left:50%;top:120px;width:920px;transform:translateX(-50%)}
+.panel{border-radius:30px;padding:32px 36px;margin-top:30px;background:rgba(255,255,255,.78)}
+.count{display:flex;align-items:baseline;justify-content:space-between}
+.count b{font:600 40px/1 var(--sans);letter-spacing:-.03em}
+.count b span{font-size:20px;font-weight:500;color:var(--mute);letter-spacing:-.01em}
+.bar{height:10px;border-radius:10px;background:rgba(22,23,27,.08);margin-top:18px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:10px;background:var(--golden)}
+.stages{display:flex;gap:12px;margin-top:26px}
+.st{flex:1;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;border-radius:16px;background:var(--fill-1);border:1px solid var(--line);font-size:14px;font-weight:500;color:var(--mute)}
+.st .ic{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;border:1.5px solid var(--line-2);color:var(--faint)}
+.st .ic svg{width:14px;height:14px;stroke-width:2.4}
+.st.done{color:var(--paper)}.st.done .ic{background:var(--lagoon-hi);border-color:transparent;color:#fff}
+.st.active{background:#fff;color:var(--paper);border-color:rgba(242,107,58,.35);box-shadow:0 8px 20px -10px rgba(242,107,58,.45)}
+.st.active .ic{border:2.5px solid rgba(242,107,58,.2);border-top-color:#F26B3A}
+.sl{font:500 11px var(--mono);letter-spacing:.12em;color:var(--faint);margin:30px 0 12px}
+.thumbs{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.thumbs div{aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--ink-3);box-shadow:var(--sh-1)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.thumbs .new{opacity:.45;transform:scale(.9)}.thumbs .ghost{background:repeating-linear-gradient(135deg,var(--ink-1) 0 8px,var(--ink-3) 8px 16px);box-shadow:none}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip.trip{height:38px;padding:0 14px 0 5px;gap:10px;background:#fff;color:var(--paper);box-shadow:var(--sh-1)}
+.chip.trip img{width:28px;height:28px;border-radius:50%;object-fit:cover}
+.chip.trip em{font-style:normal;font:500 11px var(--mono);color:var(--mute)}
+</style></head><body class="theme-light grain">
+<header class="top"><div class="brand"><div class="logo-mark"></div><b>Memories</b></div></header>
+<main id="app"></main>
+<div class="mock">Mockup · Step 1 · Uploading</div>
+<script type="module">
+import { getUpload, getTrip, thumbSrc, assetSrc } from '../js/data.js';
+import { mountIcons, icon, esc, plural, ready } from '../js/ui.js';
+await mountIcons();
+const id = new URLSearchParams(location.search).get('upload');
+const u = await getUpload(id);                                   // poll this every ~1s in the real app
+const pct = Math.round(u.processed / u.total * 100);
+const si = u.stages.findIndex(s => s.key === u.stage);
+const covers = Object.fromEntries(await Promise.all(u.tripsFound.map(async t => [t.id, (await getTrip(t.id)).coverUrl])));
+document.getElementById('app').innerHTML = `
+<div class="wrap">
+  <div class="d-l" style="font-size:64px">Adding your <i>photos</i></div>
+  <p class="t-body mute" style="margin-top:12px;font-size:16px">This runs on your computer. You can keep browsing while it finishes.</p>
+  <section class="panel glass">
+    <div class="count"><b>${u.processed.toLocaleString()} <span>of ${plural(u.total, 'photo')}</span></b><span class="mono mute" style="font-size:13px">${pct}% · ABOUT 1 MIN LEFT</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <div class="stages">${u.stages.map((s, i) => `<div class="st ${i < si ? 'done' : i === si ? 'active' : ''}"><span class="ic">${i < si ? icon('check') : ''}</span>${esc(s.label)}</div>`).join('')}</div>
+    <div class="sl">JUST ADDED</div>
+    <div class="thumbs">${u.recentThumbs.slice(0, 13).map((t, i, a) => `<div class="${i >= a.length - 2 ? 'new' : ''}"><img src="${assetSrc(t)}"></div>`).join('')}${'<div class="ghost"></div>'.repeat(4)}</div>
+    <div class="sl">TRIPS FOUND SO FAR</div>
+    <div class="chips">${u.tripsFound.map(t => `<span class="chip trip"><img src="${assetSrc(covers[t.id])}">${esc(t.title)}<em>${t.photoCount}</em></span>`).join('')}
+      <span class="chip" style="height:38px;border-style:dashed">More as we go…</span></div>
+  </section>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:22px">
+    <div class="note">${icon('lock')}Your originals are copied into the local library, never changed.</div>
+    <button class="btn btn-ghost btn-sm">Cancel</button>
+  </div>
+</div>`;
+ready();
+</script></body></html>
