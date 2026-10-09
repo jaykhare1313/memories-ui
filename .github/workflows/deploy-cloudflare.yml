@@ -1,0 +1,72 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  workflow_call:
+    inputs:
+      github_environment:
+        description: GitHub Environment name (dev or production)
+        required: true
+        type: string
+      cloudflare_project:
+        description: Cloudflare Pages project name
+        required: true
+        type: string
+      vite_app_env:
+        description: VITE_APP_ENV value (dev or prod)
+        required: true
+        type: string
+    secrets:
+      CLOUDFLARE_API_TOKEN:
+        required: true
+      CLOUDFLARE_ACCOUNT_ID:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.github_environment }}
+    concurrency:
+      group: cloudflare-pages-${{ inputs.github_environment }}
+      cancel-in-progress: true
+    env:
+      CF_PROJECT: ${{ inputs.cloudflare_project }}
+      DEPLOY_URL: https://${{ inputs.cloudflare_project }}.pages.dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_DATA_SOURCE: mock
+          VITE_APP_ENV: ${{ inputs.vite_app_env }}
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=${{ inputs.cloudflare_project }}
+
+      - name: Job summary
+        run: |
+          {
+            echo "## Deployed (${{ inputs.github_environment }})"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| **Environment** | \`${{ inputs.github_environment }}\` |"
+            echo "| **Cloudflare project** | \`${{ inputs.cloudflare_project }}\` |"
+            echo "| **URL** | ${{ env.DEPLOY_URL }} |"
+            echo "| **Commit** | \`${{ github.sha }}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -5,6 +5,7 @@ import type { TripSummary } from '@/api/types'
 import { Loader } from '@/components/Loader'
 import { PageShell } from '@/components/PageShell'
 import { SerifTitle } from '@/components/SerifTitle'
+import { formatCount } from '@/utils/pluralize'
 
 import { LatestTripBanner } from './LatestTripBanner'
 import { TripCard } from './TripCard'
@@ -46,7 +47,7 @@ export function HomeView({
           Your trips
         </SerifTitle>
         <Typography variant="body2" sx={{ mt: 0.75 }}>
-          {trips.length} trips · {totalPhotos} photos
+          {formatCount(trips.length, 'trip')} · {formatCount(totalPhotos, 'photo')}
         </Typography>
 
         <Box

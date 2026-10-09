@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    branches: [develop, main]
+  workflow_dispatch:
+
+jobs:
+  deploy-dev:
+    if: github.ref == 'refs/heads/develop'
+    uses: ./.github/workflows/deploy-cloudflare.yml
+    with:
+      github_environment: dev
+      cloudflare_project: ${{ vars.CF_PAGES_PROJECT_DEV || 'memories-ui-dev' }}
+      vite_app_env: dev
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy-cloudflare.yml
+    with:
+      github_environment: production
+      cloudflare_project: ${{ vars.CF_PAGES_PROJECT_PROD || 'memories-ui' }}
+      vite_app_env: prod
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

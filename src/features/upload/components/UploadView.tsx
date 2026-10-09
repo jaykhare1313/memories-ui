@@ -11,6 +11,7 @@ import { Loader } from '@/components/Loader'
 import { PageShell } from '@/components/PageShell'
 import { SerifTitle } from '@/components/SerifTitle'
 import { formatEta } from '@/utils/format'
+import { formatCount } from '@/utils/pluralize'
 
 import { UploadStagePills } from './UploadStagePills'
 
@@ -52,7 +53,7 @@ export function UploadView({ upload, isLoading, onCancel }: UploadViewProps) {
           }}
         >
           <Typography variant="h5" sx={{ fontSize: '1.5rem' }}>
-            {upload.processed} of {upload.total} photos
+            {upload.processed} of {formatCount(upload.total, 'photo')}
           </Typography>
           <Typography variant="caption" sx={{ color: 'memories.faint' }}>
             {pct}% · {formatEta(remaining)}

@@ -5,6 +5,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { assetSrc } from '@/api/media'
 import type { TripSummary } from '@/api/types'
 import { formatDateRange } from '@/utils/format'
+import { formatCount } from '@/utils/pluralize'
 
 interface TripCardProps {
   trip: TripSummary
@@ -49,8 +50,9 @@ export function TripCard({ trip }: TripCardProps) {
         {trip.title}
       </Typography>
       <Typography variant="body2" sx={{ mt: 0.5 }}>
-        {formatDateRange(trip.startDate, trip.endDate)} · {trip.photoCount} photos
-        {trip.videoCount > 0 ? ` · ${trip.videoCount} videos` : ''}
+        {formatDateRange(trip.startDate, trip.endDate)} ·{' '}
+        {formatCount(trip.photoCount, 'photo')}
+        {trip.videoCount > 0 ? ` · ${formatCount(trip.videoCount, 'video')}` : ''}
       </Typography>
     </Box>
   )

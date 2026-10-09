@@ -9,6 +9,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { assetSrc } from '@/api/media'
 import type { TripSummary } from '@/api/types'
 import { dayCount, formatDateRange } from '@/utils/format'
+import { formatCount } from '@/utils/pluralize'
 
 interface LatestTripBannerProps {
   trip: TripSummary
@@ -87,8 +88,8 @@ export function LatestTripBanner({ trip, onPlayFilm }: LatestTripBannerProps) {
           {trip.title}
         </Typography>
         <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.85)', mt: 1 }}>
-          {formatDateRange(trip.startDate, trip.endDate)} · {days} days · {trip.photoCount}{' '}
-          photos · {trip.videoCount} videos
+          {formatDateRange(trip.startDate, trip.endDate)} · {formatCount(days, 'day')} ·{' '}
+          {formatCount(trip.photoCount, 'photo')} · {formatCount(trip.videoCount, 'video')}
         </Typography>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, mt: 2.5 }}>
           <Button

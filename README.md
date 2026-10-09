@@ -25,7 +25,8 @@ Open [http://127.0.0.1:43123](http://127.0.0.1:43123). By default the library ha
 | `npm run dev` | Vite dev server (port 43123) |
 | `npm run build` | Typecheck + production build to `dist/` |
 | `npm run preview` | Serve `dist/` locally |
-| `npm run lint` | ESLint + TypeScript |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript (`tsc -b --noEmit`) |
 | `npm run format` | Prettier |
 
 ## Folder structure
@@ -62,7 +63,12 @@ Mock responses follow `memories-design/API_CONTRACT.md` shapes. Endpoints:
 - `GET /api/trips/{id}`
 - `GET /media/{id}/thumb`, `GET /media/{id}`
 
-## Deploy (free static hosting)
+## Deploy (CI/CD)
+
+GitHub Actions builds and deploys to **Cloudflare Pages** (`develop` → dev, `main` → prod).  
+See **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for one-time Cloudflare/GitHub setup, secrets, and promotion flow.
+
+### Manual static build
 
 Build output is a static SPA (`base: './'` for relative asset paths).
 

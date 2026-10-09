@@ -12,6 +12,7 @@ import { Loader } from '@/components/Loader'
 import { PageShell } from '@/components/PageShell'
 import { SerifTitle } from '@/components/SerifTitle'
 import { formatDayHeader, formatTripMeta } from '@/utils/format'
+import { formatCount } from '@/utils/pluralize'
 
 import { MediaTile } from './MediaTile'
 
@@ -112,7 +113,9 @@ export function TripView({ trip, isLoading, onUpload, onPlayFilm }: TripViewProp
                 {formatDayHeader(day.date, day.place)}
               </Typography>
             </Box>
-            <Typography variant="caption">{day.media.length} items</Typography>
+            <Typography variant="caption">
+              {formatCount(day.media.length, 'item')}
+            </Typography>
           </Box>
           <Box
             sx={{

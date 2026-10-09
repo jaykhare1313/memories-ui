@@ -1,3 +1,5 @@
+import { formatCount } from './pluralize'
+
 const dateFmt = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
   month: 'short',
@@ -64,11 +66,11 @@ export function formatTripMeta(
   const parts = [
     formatDateRange(start, end),
     country,
-    `${days} days`,
-    `${photoCount} photos`,
+    formatCount(days, 'day'),
+    formatCount(photoCount, 'photo'),
   ]
   if (videoCount > 0) {
-    parts.push(`${videoCount} videos`)
+    parts.push(formatCount(videoCount, 'video'))
   }
   return parts.join(' · ')
 }
