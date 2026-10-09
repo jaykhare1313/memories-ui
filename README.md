@@ -65,8 +65,8 @@ Mock responses follow `memories-design/API_CONTRACT.md` shapes. Endpoints:
 
 ## Deploy (CI/CD)
 
-GitHub Actions builds and deploys to **Cloudflare Pages** (`develop` → dev, `main` → prod).  
-See **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for one-time Cloudflare/GitHub setup, secrets, and promotion flow.
+GitHub Actions builds and deploys to **Netlify** (`develop` → dev, `main` → prod).  
+See **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for one-time Netlify/GitHub setup, secrets, and promotion flow.
 
 ### Manual static build
 
@@ -76,17 +76,11 @@ Build output is a static SPA (`base: './'` for relative asset paths).
 npm run build
 ```
 
-Upload the `dist/` folder, or connect the repo to your host:
+Upload the `dist/` folder, or use the Netlify workflow in **docs/DEPLOYMENT.md** (recommended).
 
-### Cloudflare Pages
+### Netlify (CI/CD)
 
-- Build command: `npm run build`
-- Output directory: `dist`
-- `public/_redirects` includes SPA fallback (`/* /index.html 200`)
-
-### Netlify
-
-Uses `netlify.toml` (build + redirect to `index.html`).
+Actions runs `netlify deploy --dir=dist --prod` per site. `netlify.toml` and `public/_redirects` provide SPA fallback (`/* /index.html 200`). Disable Netlify’s Git builds when using Actions-only deploys.
 
 ### Vercel
 

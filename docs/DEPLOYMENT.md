@@ -1,61 +1,55 @@
-# Deployment (Cloudflare Pages + GitHub Actions)
+# Deployment (Netlify + GitHub Actions)
 
-Memories UI ships as a static SPA. **Develop** and **production** each have their own Cloudflare Pages project and GitHub Environment.
+Memories UI ships as a static SPA. **Develop** and **production** each have their own Netlify site and GitHub Environment. **GitHub Actions** builds `dist/` and deploys with the Netlify CLI—Netlify’s connected-repo auto-builds should stay **off** so Actions remains the only deploy path.
 
 ## URLs
 
-| Environment | Branch | Cloudflare project (default) | URL |
-|-------------|--------|------------------------------|-----|
-| Dev | `develop` | `memories-ui-dev` | https://memories-ui-dev.pages.dev |
-| Production | `main` | `memories-ui` | https://memories-ui.pages.dev |
+| Environment | Branch | Site name (target) | Typical URL |
+|-------------|--------|--------------------|-------------|
+| Dev | `develop` | `memories-ui-dev` | https://memories-ui-dev.netlify.app |
+| Production | `main` | `memories-ui` | https://memories-ui.netlify.app |
 
-Project names can be overridden with repository **Variables** (see below).
+Netlify site names must be **globally unique**. If a name is taken, pick another (e.g. `memories-ui-dev-jay`) and use that site’s URL—the **Site ID** in GitHub secrets is what the workflow uses, not the subdomain string.
 
 ## One-time setup (Jay)
 
-### 1. Cloudflare (free)
+### 1. Netlify (free)
 
-1. Create a [Cloudflare](https://dash.cloudflare.com/sign-up) account.
-2. Note your **Account ID** (Workers & Pages → overview, right column).
-3. Create an **API token**:
-   - My Profile → API Tokens → Create Token → **Custom token**
-   - Permission: **Account** → **Cloudflare Pages** → **Edit**
-   - Account resources: include this account
-4. Pages projects:
-   - Either create two projects in the dashboard (**memories-ui-dev**, **memories-ui**), or let the first `wrangler pages deploy` create them when the workflow runs.
+1. Sign up at [netlify.com](https://www.netlify.com/).
+2. Create **two sites** (no need to connect Git yet):
+   - **Option A — Dashboard:** Add new site → **Deploy manually** (drag-and-drop any folder once, or skip after site creation).
+   - **Option B — CLI:** `npm i -g netlify-cli && netlify login`, then  
+     `netlify sites:create --name memories-ui-dev` and `netlify sites:create --name memories-ui`.
+3. For each site, open **Site configuration → General → Site details** and copy the **Site ID** (API ID).
+4. **Disable Netlify Git builds** (so only GitHub Actions deploys):
+   - If you linked a repo: **Build & deploy → Continuous deployment → Stop builds** (or unlink the repo).
+   - For manual sites: leave **Build settings** empty; no build command or publish directory on Netlify.
+5. Create a **Personal access token**: User settings → **Applications** → **Personal access tokens** → New token (deploy scope is sufficient).
 
-SPA routing: `public/_redirects` is copied into `dist/` on build (`/* /index.html 200`). No extra Cloudflare config required.
+SPA routing: `netlify.toml` and `public/_redirects` (`/* /index.html 200`) are copied into `dist/` on build.
 
 ### 2. GitHub repository (`jaykhare1313/memories-ui`)
-
-After mirroring/pushing this repo:
 
 **Secrets** (Settings → Secrets and variables → Actions → Secrets):
 
 | Secret | Value |
 |--------|--------|
-| `CLOUDFLARE_API_TOKEN` | Token from step 3 above |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID |
-
-**Variables** (optional; defaults match this repo):
-
-| Variable | Default | Purpose |
-|----------|---------|---------|
-| `CF_PAGES_PROJECT_DEV` | `memories-ui-dev` | Dev Pages project name |
-| `CF_PAGES_PROJECT_PROD` | `memories-ui` | Prod Pages project name |
+| `NETLIFY_AUTH_TOKEN` | Netlify personal access token |
+| `NETLIFY_SITE_ID_DEV` | Site ID for the dev site |
+| `NETLIFY_SITE_ID_PROD` | Site ID for the production site |
 
 **Environments** (Settings → Environments):
 
-1. **`dev`** — used when deploying from `develop`.
-2. **`production`** — used when deploying from `main`.
+1. **`dev`** — deploys from `develop`.
+2. **`production`** — deploys from `main`.
 
-Optional: on **`production`**, add **Required reviewers** so prod deploys need approval.  
-**Note:** Environment protection rules (required reviewers, wait timers) on **private** repositories require a paid GitHub plan. Public repos can use reviewers on free plans.
+Optional: on **`production`**, add **Required reviewers** for deploy approval.  
+**Note:** Environment protection rules on **private** repositories require a paid GitHub plan. Public repos can use reviewers on free plans.
 
 ### 3. Branches
 
 - `main` → production deploys  
-- `develop` → dev deploys (create from `main` if missing)
+- `develop` → dev deploys  
 
 ## CI/CD flow
 
@@ -69,24 +63,24 @@ flowchart LR
   end
   subgraph dev [develop branch]
     F[push develop] --> G[build VITE_APP_ENV=dev]
-    G --> H[pages deploy memories-ui-dev]
+    G --> H[netlify deploy --prod]
   end
   subgraph prod [main branch]
     I[push main] --> J[build VITE_APP_ENV=prod]
-    J --> K[pages deploy memories-ui]
+    J --> K[netlify deploy --prod]
   end
 ```
 
 ### Promotion workflow
 
-1. Feature branch → **PR into `develop`** → CI runs on the PR.
-2. Merge to **`develop`** → CI runs again + **Deploy** pushes to **memories-ui-dev** (DEV badge visible).
-3. **PR `develop` → `main`** → CI on the PR.
-4. Merge to **`main`** → CI + **Deploy** pushes to **memories-ui** (no DEV badge).
+1. Feature branch → **PR into `develop`** → CI runs.
+2. Merge to **`develop`** → CI + **Deploy** → dev Netlify site (**DEV** badge in the app bar).
+3. **PR `develop` → `main`** → CI.
+4. Merge to **`main`** → CI + **Deploy** → production Netlify site.
 
-Manual prod/dev deploy: Actions → **Deploy** → **Run workflow** (choose `main` or `develop`).
+Manual deploy: Actions → **Deploy** → **Run workflow** on `develop` or `main`.
 
-Concurrency: one deploy at a time per environment (`cloudflare-pages-dev` / `cloudflare-pages-production`); newer runs cancel in-progress deploys.
+Concurrency: one deploy at a time per environment (`netlify-dev` / `netlify-production`); newer runs cancel in-progress deploys.
 
 ## Build-time env (deploy workflows)
 
@@ -95,14 +89,12 @@ Concurrency: one deploy at a time per environment (`cloudflare-pages-dev` / `clo
 | `VITE_DATA_SOURCE` | `mock` | `mock` |
 | `VITE_APP_ENV` | `dev` | `prod` |
 
-Switch to a real API later by setting `VITE_DATA_SOURCE=api` and `VITE_API_BASE_URL` in the workflow build step.
-
 ## Rollback
 
-1. Open [Cloudflare Pages](https://dash.cloudflare.com/) → select the project → **Deployments**.
-2. Find a previous successful deployment → **Rollback to this deployment** (or **Promote to production**).
+1. Open [Netlify](https://app.netlify.com/) → select the site → **Deploys**.
+2. Find a previous successful production deploy → **Publish deploy** (or **Restore**).
 
-Git revert + push to `develop` or `main` is also fine; that triggers a new deploy from the older commit.
+Alternatively, git revert on `develop` or `main` and push to trigger a new deploy from that commit.
 
 ## Local parity
 
@@ -113,4 +105,10 @@ npm run typecheck
 VITE_DATA_SOURCE=mock VITE_APP_ENV=dev npm run build
 ```
 
-Preview: `npm run preview`
+Optional manual Netlify deploy (after `netlify login`):
+
+```bash
+NETLIFY_AUTH_TOKEN=... npx netlify-cli deploy --dir=dist --prod --site=YOUR_SITE_ID
+```
+
+Preview locally: `npm run preview`

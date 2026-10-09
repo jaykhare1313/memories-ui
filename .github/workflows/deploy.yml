@@ -8,22 +8,22 @@ on:
 jobs:
   deploy-dev:
     if: github.ref == 'refs/heads/develop'
-    uses: ./.github/workflows/deploy-cloudflare.yml
+    uses: ./.github/workflows/deploy-netlify.yml
     with:
       github_environment: dev
-      cloudflare_project: ${{ vars.CF_PAGES_PROJECT_DEV || 'memories-ui-dev' }}
       vite_app_env: dev
+      site_label: memories-ui-dev
     secrets:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DEV }}
 
   deploy-production:
     if: github.ref == 'refs/heads/main'
-    uses: ./.github/workflows/deploy-cloudflare.yml
+    uses: ./.github/workflows/deploy-netlify.yml
     with:
       github_environment: production
-      cloudflare_project: ${{ vars.CF_PAGES_PROJECT_PROD || 'memories-ui' }}
       vite_app_env: prod
+      site_label: memories-ui
     secrets:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_PROD }}
